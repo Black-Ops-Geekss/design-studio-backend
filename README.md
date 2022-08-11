@@ -50,3 +50,9 @@ Schema For User Information={
     "Delivery": Boolean
 }
 ```
+
+# WireFrams
+
+![Wireframe 1](https://i.imgur.com/fv6MeOk.png)
+![Wireframe 2](https://i.imgur.com/bHuwCZP.png)
+![Wireframe 3](https://i.imgur.com/kxNDy16.png)
