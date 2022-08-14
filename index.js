@@ -12,6 +12,7 @@ const deleteDesign = require('./modules/deleteDesign/deleteDesign');
 const userDesign = require('./modules/user/userDesign');
 const getData = require('./modules/unsplash/getData');
 const getSelection = require('./modules/unsplash/getSelection');
+const sendOrders = require('./modules/user/sendOrders');
 
 const app = express();
 app.use(cors());
@@ -33,6 +34,8 @@ app.get('/getCategories', getData);
 
 
 app.post('/userRequest', userInfo);
+app.get('/sendOrders', sendOrders);
+
 app.post('/userDesign', userDesign);
 
 app.delete('/deleteDesign/:id', deleteDesign)
