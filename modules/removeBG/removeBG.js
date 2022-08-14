@@ -30,8 +30,10 @@ function removeBG(req, res) {
             })
                 .then((response) => {
                     if (response.status != 200) return console.error('Error:', response.status, response.statusText);
+                    console.log(response)
                     fs.writeFileSync("./modules/removeBG/no-bg.png", response.data);
                     res.send('done')
+
                 })
                 .catch((error) => {
                     res.send(error)
