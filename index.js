@@ -14,7 +14,8 @@ const userDesign = require('./modules/user/userDesign');
 const app = express();
 app.use(cors());
 app.use(express.json());
-mongoose.connect(`mongodb://localhost:27017/designs`);
+mongoose.connect(`mongodb://localhost:27017/designStore`);
+
 
 app.get('/', (req, res) => {
     res.send('Hello from Black Ops Geeks');
