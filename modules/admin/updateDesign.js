@@ -1,16 +1,16 @@
+const SaveDesigns = require( '../unsplash/schema' );
 
-const SaveDesigns = require('../unsplash/schema');
 
-function updateDesign(req, res) {
+
+
+function updateDesign ( req, res ) {
     const id = req.params.id;
-    const {data} = req.body;
-  
-    SaveDesigns.findByIdAndUpdate(id, data, {new: true}).then(record => {
-        res.send(record);
-    }).catch(err => {
-        console.log(err)
-        res.status(500).send(err.message);
-    })
-  }
+    const { data } = req.body;
+    SaveDesigns.findByIdAndUpdate( id, data, { new: true } ).then( record => {
+        res.send( record );
+    } ).catch( err => {
+        res.status( 500 ).send( err.message );
+    } );
+}
 
-  module.exports = updateDesign;
+module.exports = updateDesign;
