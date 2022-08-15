@@ -4,7 +4,6 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const axios = require('axios');
 const removeBG = require('./modules/removeBG/removeBG');
 const getDesigns = require('./modules/unsplash/getDesigns');
 const userInfo = require('./modules/user/userInfo');
@@ -13,6 +12,8 @@ const userDesign = require('./modules/user/userDesign');
 const getData = require('./modules/unsplash/getData');
 const getSelection = require('./modules/unsplash/getSelection');
 const sendOrders = require('./modules/user/sendOrders');
+const updateDesign = require('./modules/admin/updateDesign');
+const deleteOrder = require('./modules/admin/deleteOrder');
 
 const app = express();
 app.use(cors());
@@ -32,16 +33,18 @@ app.get('/getSelection/:id', getSelection);
 app.get('/removeBG/:id', removeBG);
 app.get('/getCategories', getData);
 
-
 app.post('/userRequest', userInfo);
 app.get('/sendOrders', sendOrders);
 
 app.post('/userDesign', userDesign);
 
 app.delete('/deleteDesign/:id', deleteDesign)
+app.delete('/deleteOrder/:id', deleteOrder)
 
-// app.use(express.static('public')); 
-app.use('/static', express.static('~/modules/removeBG/no-bg.png'));
+
+
+app.put('/editDesign/:id', updateDesign);
+
 
 
 const port = process.env.PORT || 3002;
