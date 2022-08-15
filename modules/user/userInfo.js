@@ -1,24 +1,20 @@
 "use strict";
 
-const SaveDesigns = require('../unsplash/schema');
+const SaveOrder = require('./contactSchema');
 
 
 function userInfo(req, res) {
 
-    const userInfo = req.body;
-    console.log(userInfo);
-    const newDesign = new SaveDesigns({
-        category: "UserInfo",
-        title: "ContactInfo",
-        name: userInfo.name,
-        email: userInfo.email,
-        phone: userInfo.phone
-    });
-    newDesign.save();
+    const {newOrder} = req.body;
+    console.log(newOrder);
 
-    console.log(newDesign);
-    res.send(`Thanks for your request ${userInfo.name}`);
+    const order = new SaveOrder(newOrder);
+    order.save();
+
+    console.log();
+    res.send(`Thanks for your request ${newOrder.name}`);
 }
+
 module.exports = userInfo;
 
 
