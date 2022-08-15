@@ -13,7 +13,7 @@ app.use(express.json());
 
 // MongoDB
 const mongoose = require('mongoose');
-mongoose.connect(`mongodb://localhost:27017/designStore`);
+mongoose.connect(`${process.env.MONGO_URI}`);
 
 
 // Cors for cross-origin
@@ -22,7 +22,7 @@ app.use(cors());
 
 
 
-// modules import
+// Modules import
 const getDesigns = require('./modules/unsplash/getDesigns');
 const getData = require('./modules/unsplash/getData');
 const getSelection = require('./modules/unsplash/getSelection');
@@ -40,13 +40,13 @@ app.get('/', (req, res) => {
 });
 
 
-// inialize the database 
+// Initialize the database 
 app.get('/getDesigns', getDesigns);
 
 
 
 
-// get all designs or single design by ID
+// Get all designs or single design by ID
 app.get('/getCategories', getData);
 app.get('/getSelection/:id', getSelection);
 
@@ -54,17 +54,17 @@ app.get('/getSelection/:id', getSelection);
 
 
 
-// user info and orders 
+// User info and orders 
 app.post('/userRequest', userInfo);
 app.get('/sendOrders', sendOrders);
 
 
-// admin delete and edit design data , admin delete order
+// Admin delete and edit design data , admin delete order
 app.delete('/deleteDesign/:id', deleteDesign)
 app.put('/editDesign/:id', updateDesign);
 app.delete('/deleteOrder/:id', deleteOrder)
 
-// port listen 
+// Port listen 
 const port = process.env.PORT || 3002;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
