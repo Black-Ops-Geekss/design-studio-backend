@@ -1,55 +1,73 @@
-"use strict'";
+'use strict';
 
+
+// Dotenv
 require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const removeBG = require('./modules/removeBG/removeBG');
-const getDesigns = require('./modules/unsplash/getDesigns');
-const userInfo = require('./modules/user/userInfo');
-const deleteDesign = require('./modules/deleteDesign/deleteDesign');
-const userDesign = require('./modules/user/userDesign');
-const getData = require('./modules/unsplash/getData');
-const getSelection = require('./modules/unsplash/getSelection');
-const sendOrders = require('./modules/user/sendOrders');
-const updateDesign = require('./modules/admin/updateDesign');
 
+
+// Express 
+const express = require('express');
 const app = express();
-app.use(cors());
 app.use(express.json());
 
-mongoose.connect(`mongodb://localhost:27017/designStore`);
+
+// MongoDB
+const mongoose = require('mongoose');
+mongoose.connect(`${process.env.MONGO_URI}`);
 
 
+// Cors for cross-origin
+const cors = require('cors');
+app.use(cors());
+
+
+
+// Modules import
+const getDesigns = require('./modules/unsplash/getDesigns');
+const getData = require('./modules/unsplash/getData');
+const getSelection = require('./modules/unsplash/getSelection');
+const userInfo = require('./modules/user/userInfo');
+const sendOrders = require('./modules/user/sendOrders');
+const deleteDesign = require('./modules/admin/deleteDesign');
+const updateDesign = require('./modules/admin/updateDesign');
+const deleteOrder = require('./modules/admin/deleteOrder');
+
+
+
+// Check for alive 
 app.get('/', (req, res) => {
     res.send('Hello from Black Ops Geeks');
 });
 
+
+// Initialize the database 
 app.get('/getDesigns', getDesigns);
 
+
+
+
+// Get all designs or single design by ID
+app.get('/getCategories', getData);
 app.get('/getSelection/:id', getSelection);
 
-app.get('/removeBG/:id', removeBG);
-app.get('/getCategories', getData);
 
 
+
+
+// User info and orders 
 app.post('/userRequest', userInfo);
 app.get('/sendOrders', sendOrders);
 
-app.post('/userDesign', userDesign);
 
+// Admin delete and edit design data , admin delete order
 app.delete('/deleteDesign/:id', deleteDesign)
-
-
 app.put('/editDesign/:id', updateDesign);
+app.delete('/deleteOrder/:id', deleteOrder)
 
-
-
+// Port listen 
 const port = process.env.PORT || 3002;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 }).on('error', (err) => {
     console.log(err);
 });
-
-// check if you server is connected to mongo Atlas via app.listen
