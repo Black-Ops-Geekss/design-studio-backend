@@ -8,14 +8,14 @@ const SaveDesigns = require( './schema' );
 async function getDesigns ( req, res ) {
 
 
-    const designCategory = [ "galaxy", "cool", "fashion", "paint" ];
+    const designCategory = [ "galaxy", "jordan", "skeleton", "rose", "baby groot", "robot" ];
 
     designCategory.forEach( async ( cato ) => {
         const response = await axios.get( 'https://api.unsplash.com/search/photos', {
             params: {
                 query: cato,
                 page: 1,
-                per_page: 5,
+                per_page: 2,
                 client_id: `${process.env.UNSPLASH_KEY}`,
                 response_type: 'json',
                 redirect_uri: `urn:ietf:wg:oauth:2.0:oob`
