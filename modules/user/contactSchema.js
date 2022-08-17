@@ -7,6 +7,7 @@ const NewOrder = new mongoose.Schema( {
     name: String,
     email: String,
     phone: String,
+    location: String,
     items: Array
 } );
 
